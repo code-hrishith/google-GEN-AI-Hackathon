@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ManoHEAL Group Chat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Reset */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      body {
+        font-family: 'Inter', Arial, sans-serif;
+        background: linear-gradient(135deg, #fff0e1 0%, #ffe5d9 100%); /* Peach background */
+        color: #202048; /* Primary Text: deep indigo */
+        line-height: 1.6;
+        padding-top: 80px; /* Space for the fixed header */
+      }
+
+      /* Unified Wrapper for Content Centering */
+      .wrap {
+        width: 100%;
+        height:100%;
+        max-height: 1700px;
+        max-width: 1700px; /* Consistent max-width for all content */
+        margin: 0 auto;
+        padding: 0 40px; /* Consistent side padding */
+      }
+
+      /* Header (Shared) */
+      .site-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        border-bottom: 1px solid #FEE2E2; /* Light rose border */
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        height: 80px;
+      }
+
+      /* Full-width header content */
+      .site-header .wrap {
+        max-width: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .logo {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      .brand-name {
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: #202048;
+      }
+
+      .main-nav a {
+        margin: 0 16px;
+        color: #7975a5;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      .main-nav a.active,
+      .main-nav a:hover {
+        color: #e69299;
+      }
+
+      .login-btn {
+        padding: 10px 20px;
+        border-radius: 8px;
+        background: #e69299;
+        color: #fff;
+        font-weight: 700;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      .login-btn:hover {
+        background-color: #e5a4a9;
+        transform: translateY(-2px);
+      }
+      
+      main.wrap {
+          padding-top: 40px;
+          padding-bottom: 40px;
+          height: calc(100vh - 80px); /* Full height minus header */
+      }
+      
+      /* Group Chat Specific Styles */
+      .active-group {
+        background-color: #ffe5d9;
+        border-left: 4px solid #e69299;
+      }
+      #chat-window::-webkit-scrollbar, #group-list::-webkit-scrollbar {
+        width: 6px;
+      }
+      #chat-window::-webkit-scrollbar-track, #group-list::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      #chat-window::-webkit-scrollbar-thumb, #group-list::-webkit-scrollbar-thumb {
+        background: #e5a4a9;
+        border-radius: 3px;
+      }
+      #chat-window::-webkit-scrollbar-thumb:hover, #group-list::-webkit-scrollbar-thumb:hover {
+        background: #e69299;
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "primary-text": "#202048",
+              "secondary-text": "#7975a5",
+              "accent-rose": "#e69299",
+              "accent-pink": "#e5a4a9",
+              "accent-mauve": "#805c6c",
+              "ui-steel-blue": "#3c4c6c",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="text-primary-text">
+    
+    <!-- Top Navigation Bar -->
+    <header class="site-header">
+      <div class="wrap">
+        <div class="brand">
+          <img src="circular_logo.png" alt="मनोHEAL logo" class="logo">
+          <span class="brand-name"><a href="/index">मनोHEAL</a></span>
+        </div>
+  
+        <nav class="main-nav">    
+        <a href="/AIChatbot">Emily</a>
+        <a href="/news">Newsfeed</a>
+        <a href="/yoga">Yoga</a>
+        <a href="/group_chat_2">GroupChat</a>
+        <a href="/mood" >My Space</a>
+        </nav>
+  
+        <div class="header-cta">
+          <a class="btn login-btn" href="/profile">Profile</a>
+          <a class="btn login-btn" href="/logout">Logout</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="wrap">
+        <div class="flex h-full overflow-hidden bg-white/30 rounded-2xl shadow-lg border border-rose-100">
+            <!-- Left Sidebar: Group List -->
+            <aside
+              class="w-1/3 xl:w-1/4 bg-white/50 backdrop-blur-md border-r border-rose-100 flex flex-col"
+            >
+              <div class="p-4 border-b border-rose-100">
+                <input
+                  type="text"
+                  placeholder="Search or start new chat"
+                  class="w-full p-2 rounded-lg bg-rose-100/50 focus:ring-2 focus:ring-accent-rose focus:outline-none placeholder-secondary-text text-primary-text"
+                />
+              </div>
+              <div id="group-list" class="flex-1 overflow-y-auto">
+                <!-- Group items will be injected here by JS -->
+              </div>
+            </aside>
+    
+            <!-- Right Side: Chat Interface -->
+            <div class="flex-1 flex flex-col">
+              <div
+                id="chat-header"
+                class="p-4 border-b border-rose-100 bg-white/50 backdrop-blur-md flex items-center space-x-4 flex-shrink-0"
+              >
+                <!-- Chat header content will be updated by JS -->
+              </div>
+              <div id="chat-window" class="flex-1 p-6 space-y-4 overflow-y-auto">
+                <!-- Chat messages will be injected here by JS -->
+              </div>
+              <div
+                class="p-4 bg-white/50 backdrop-blur-md border-t border-rose-100 flex-shrink-0"
+              >
+                <div
+                  class="flex items-center bg-rose-100/50 rounded-full px-4 py-2"
+                >
+                  <input
+                    type="text"
+                    id="message-input"
+                    placeholder="Type a message"
+                    class="flex-1 bg-transparent border-none focus:ring-0 text-primary-text placeholder-secondary-text"
+                  />
+                  <button
+                    id="send-button"
+                    class="ml-4 p-2 rounded-full bg-gradient-to-r from-accent-rose to-accent-pink text-white hover:opacity-90 transition-colors shadow-lg shadow-rose-500/30"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+      const groupList = document.getElementById("group-list");
+      const chatHeader = document.getElementById("chat-header");
+      const chatWindow = document.getElementById("chat-window");
+      const messageInput = document.getElementById("message-input");
+      const sendButton = document.getElementById("send-button");
+
+      const chatData = {
+        group1: {
+          name: "Mindfulness & Meditation",
+          avatar: "🧘‍♀️",
+          members: ["You", "skywalker_/", "calmwave9832", "HopeFullness_321"],
+          messages: [
+            { sender: "skywalker_/", text: "Hey everyone! Just finished a great 10-minute session.", time: "10:30 AM" },
+            { sender: "You", text: "Nice! I'm hoping to get one in this afternoon.", time: "10:31 AM" },
+            { sender: "HopeFullness_321", text: "That's awesome! Any tips for staying focused?", time: "10:32 AM" },
+          ],
+        },
+        group2: {
+          name: "Coping Strategies",
+          avatar: "💪",
+          members: ["You", "chillvibes_09", "anon_mindset"],
+          messages: [
+            { sender: "chillvibes_09", text: "Feeling a bit overwhelmed today. The breathing exercises are helping though.", time: "11:15 AM" },
+            { sender: "You", text: "Hang in there, chillvibes_09! You got this.", time: "11:16 AM" },
+          ],
+        },
+        group3: {
+          name: "Weekly Wins",
+          avatar: "🎉",
+          members: ["You", "anon_mindset", "calmwave9832", "hillvibes_09", "HopeFullness_321"],
+          messages: [
+            { sender: "calmwave9832", text: "Just wanted to share that I went for a walk this morning even though I didn't feel like it!", time: "9:05 AM" },
+            { sender: "hillvibes_09", text: "That's a huge win, calmwave9832! Congrats!", time: "9:06 AM" },
+          ],
+        },
+        group4: {
+          name: "Book Club",
+          avatar: "📚",
+          members: ["You", "hillvibes_09", "anon_mindset"],
+          messages: [
+            { sender: "hillvibes_09", text: "What did everyone think of the last chapter?", time: "Yesterday" },
+          ],
+        },
+      };
+
+      const otherUsers = ["hillvibes_09", "anon_mindset", "calmwave9832", "HopeFullness_321", "skywalker_/", "hopeful_heart_421"];
+      const randomReplies = [
+        "That's a great point.", "I agree!", "Thanks for sharing.", "Interesting perspective.",
+        "I needed to hear that today.", "Well said.", "👍", "💯",
+      ];
+
+      let activeGroupId = "group1";
+
+      function renderGroupList() {
+        groupList.innerHTML = "";
+        for (const groupId in chatData) {
+          const group = chatData[groupId];
+          const lastMessage = group.messages[group.messages.length - 1];
+          const groupElement = document.createElement("div");
+          groupElement.className = `p-4 flex items-center space-x-4 cursor-pointer hover:bg-rose-100/50 ${ groupId === activeGroupId ? "active-group" : "" }`;
+          groupElement.dataset.groupId = groupId;
+          groupElement.innerHTML = `
+                    <div class="w-12 h-12 rounded-full bg-rose-100 flex items-center justify-center text-2xl">${group.avatar}</div>
+                    <div class="flex-1 overflow-hidden">
+                        <p class="font-semibold truncate text-primary-text">${group.name}</p>
+                        <p class="text-sm text-secondary-text truncate">${lastMessage.sender}: ${lastMessage.text}</p>
+                    </div>
+                    <span class="text-xs text-secondary-text">${lastMessage.time}</span>
+                `;
+          groupElement.addEventListener("click", () => {
+            activeGroupId = groupId;
+            renderGroupList();
+            renderChat();
+          });
+          groupList.appendChild(groupElement);
+        }
+      }
+
+      function renderChat() {
+        const group = chatData[activeGroupId];
+        chatHeader.innerHTML = `
+                <div class="w-12 h-12 rounded-full bg-rose-100 flex items-center justify-center text-2xl">${group.avatar}</div>
+                <div>
+                    <h2 class="text-lg font-semibold text-primary-text">${group.name}</h2>
+                    <p class="text-sm text-secondary-text">${group.members.join(", ")}</p>
+                </div>
+            `;
+        chatWindow.innerHTML = "";
+        group.messages.forEach((msg) => addMessageToChat(msg.sender, msg.text, msg.time));
+      }
+
+      function addMessageToChat(sender, text, time) {
+        const messageElement = document.createElement("div");
+        const isUser = sender === "You";
+        messageElement.className = `flex ${ isUser ? "justify-end" : "justify-start" }`;
+        messageElement.innerHTML = `
+                <div class="max-w-md">
+                    <div class="p-3 rounded-lg shadow-md ${ isUser ? "bg-gradient-to-br from-accent-rose to-accent-pink text-white rounded-br-none" : "bg-white/80 rounded-bl-none" }">
+                        ${ !isUser ? `<p class="text-xs font-semibold text-accent-mauve mb-1">${sender}</p>` : "" }
+                        <p class="text-sm">${text}</p>
+                    </div>
+                    <p class="text-xs text-secondary-text mt-1.5 ${ isUser ? "text-right" : "text-left" }">${time}</p>
+                </div>
+            `;
+        chatWindow.appendChild(messageElement);
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+      }
+
+      function sendMessage() {
+        const text = messageInput.value.trim();
+        if (text === "") return;
+        const time = new Date().toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true });
+        const newMessage = { sender: "You", text, time };
+        chatData[activeGroupId].messages.push(newMessage);
+        addMessageToChat("You", text, time);
+        messageInput.value = "";
+        renderGroupList();
+        
+        setTimeout(() => {
+          const randomUser = otherUsers[Math.floor(Math.random() * otherUsers.length)];
+          const randomReplyText = randomReplies[Math.floor(Math.random() * randomReplies.length)];
+          const replyTime = new Date().toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true });
+          const replyMessage = { sender: randomUser, text: randomReplyText, time: replyTime };
+          chatData[activeGroupId].messages.push(replyMessage);
+          addMessageToChat(randomUser, randomReplyText, replyTime);
+          renderGroupList();
+        }, 1000 + Math.random() * 1000);
+      }
+
+      sendButton.addEventListener("click", sendMessage);
+      messageInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          sendMessage();
+        }
+      });
+
+      renderGroupList();
+      renderChat();
+    </script>
+  </body>
+</html>
+

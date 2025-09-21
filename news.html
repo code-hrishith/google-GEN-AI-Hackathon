@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>News & Events — मनोHEAL</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600&display=swap" rel="stylesheet"> -->
+  <style>
+    /* Reset & Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    .hidden {
+      display: none;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+
+      background: linear-gradient(135deg, #fff0e1 0%, #ffe5d9 100%);
+      color: #202048;
+      line-height: 1.6;
+      padding-top: 80px;
+    }
+    /* Unified Wrapper for Content Centering */
+    .wrap {
+      width: 100%;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    /* Header (Shared) */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      border-bottom: 1px solid #FEE2E2;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      height: 80px;
+    }
+    /* Full-width header content */
+    .site-header .wrap {
+      max-width: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .brand-name {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #202048;
+    }
+    .main-nav a {
+      margin: 0 16px;
+      color: #7975a5;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .main-nav a.active,
+    .main-nav a:hover {
+      color: #e69299;
+    }
+    .login-btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      background: #e69299;
+      color: #fff;
+      text-decoration: none;
+      height: 45px;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
+    }
+    .login-btn:hover {
+      background: #e5a4a9;
+    }
+    .header-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .header-cta .btn {
+      width: auto;
+    }
+    /* Main Content */
+    main.news {
+      padding-top: 40px;
+    }
+    main.news h1,
+    main.news h2 {
+      color: #574669;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    main.news h1 {
+      font-size: 2.5rem;
+    }
+    main.news h2 {
+      font-size: 2rem;
+      text-align: left;
+    }
+    article {
+      margin-bottom: 40px;
+    }
+    /* Events Accordion */
+    .events {
+      margin-bottom: 40px;
+    }
+    .event {
+      background: #FFFFFF;
+      border: 1px solid #FEE2E2;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    .event-header {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 16px;
+      text-align: left;
+      font-size: 1.1rem;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      color: #202048;
+    }
+    .event-arrow {
+      font-size: 1.5rem;
+      color: #7975a5;
+      transition: transform 0.3s ease;
+    }
+    .event-body {
+      display: none;
+      padding: 0 16px 16px;
+      color: #7975a5;
+    }
+    .event-body p {
+      margin-bottom: 8px;
+    }
+    .event.open .event-body {
+      display: block;
+    }
+    .event.open .event-arrow {
+      transform: rotate(180deg);
+    }
+    /* News Cards */
+    .yoga-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .yoga-card {
+      background: #fff;
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #FEE2E2;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .yoga-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    .yoga-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .yoga-card h3 {
+      margin: 10px 0 8px;
+      font-size: 1.2rem;
+      color: #574669;
+      flex-grow: 1;
+    }
+    .yoga-card p {
+      font-size: 1rem;
+      color: #7975a5;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+    .yoga-card button,
+    .btn {
+      display: inline-block;
+      background: #e69299;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: background .3s;
+      width: 100%;
+      margin-top: auto;
+    }
+    .yoga-card button:hover,
+    .btn:hover {
+      background: #e5a4a9;
+    }
+    .btn.small {
+      padding: 6px 12px;
+      font-size: 0.9rem;
+      width: auto;
+    }
+    /* Footer */
+    .site-footer {
+      background: rgba(255, 255, 255, 0.7);
+      border-top: 1px solid #FEE2E2;
+      padding: 24px 0;
+      margin-top: 40px;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-nav a {
+      margin-right: 16px;
+      color: #7975a5;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .footer-nav a:hover {
+      color: #e69299;
+    }
+    .copyright {
+      color: #7975a5;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand">
+        <img src="circular_logo.png" alt="Logo" class="logo"/>
+        <span class="brand-name"><a href="/index">मनोHEAL</a></span>
+      </div>
+      <nav class="main-nav">
+        <a href="/AIChatbot">Emily</a>
+        <a href="/news">Newsfeed</a>
+        <a href="/yoga">Yoga</a>
+        <a href="/group_chat_2">GroupChat</a>
+        <a href="/mood">My Space</a>
+      </nav>
+      <div class="header-cta">
+        <a id="profile-btn" class="btn login-btn" href="/profile">Profile</a>
+        <a id="logout-btn" class="btn login-btn" href="/logout">Logout</a>
+        <div class="relative inline-block ml-2">
+          <button id="language-toggle" class="p-2 rounded-full text-secondary-text hover:bg-rose-100/50 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9V3m0 18a9 9 0 01-9-9m9-9a9 9 0 00-9 9" />
+            </svg>
+          </button>
+          <div id="language-menu" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-xl py-1 z-30">
+            <a href="#" data-lang="en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">English</a>
+            <a href="#" data-lang="hi" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">हिंदी (Hindi)</a>
+            <a href="#" data-lang="ks" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Kashmiri</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <main class="news wrap">
+    <h1 id="page-title">Newsfeed</h1>
+    <article>
+      <section class="events wrap" id="events">
+        <h2 id="support-title">Support for Youth</h2>
+        <div class="event">
+          <button class="event-header">
+            <span id="event1-title" class="event-title">Group session</span>
+            <span class="event-arrow">▾</span>
+          </button>
+          <div class="event-body">
+            <p>12 Sept 2024, 7:00 pm – 11:00 pm</p>
+            <p>Location is GBU</p>
+            <a id="details-btn1" href="#" class="btn small">Details</a>
+          </div>
+        </div>
+        <div class="event">
+          <button class="event-header">
+            <span id="event2-title" class="event-title">Happy session</span>
+            <span class="event-arrow">▾</span>
+          </button>
+          <div class="event-body">
+            <p>20 Sept 2024, 7:00 pm – 11:00 pm</p>
+            <p>Location is Pari chok</p>
+            <a id="details-btn2" href="#" class="btn small">Details</a>
+          </div>
+        </div>
+        <div class="event">
+          <button class="event-header">
+            <span id="event3-title" class="event-title">Awareness Drive</span>
+            <span class="event-arrow">▾</span>
+          </button>
+          <div class="event-body">
+            <p>30 Sept 2024, 7:00 pm – 11:00 pm</p>
+            <p>Location isIIt</p>
+            <a id="details-btn3" href="#" class="btn small">Details</a>
+          </div>
+        </div>
+      </section>
+      <section class="yoga-cards">
+        <div class="yoga-card">
+          <img src="mentalhealth.jpeg" alt="news">
+          <h3 id="card1-title">What is depression and what can I do about it?</h3>
+          <p id="card1-p">Depression is a mental health condition that causes chronic feelings of emptiness, sadness, or an inability to feel pleasure. These feelings may seem to happen for no clear reason.</p>
+          <button id="card1-btn">Read more</button>
+        </div>
+        <div class="yoga-card">
+          <img src="greengirl.jpeg" alt="news">
+          <h3 id="card2-title">What to know about anxiety</h3>
+          <p id="card2-p">Anxiety disorders are a category of mental health diagnoses that involve excessive nervousness, fear, apprehension, and worry. These symptoms can interfere with a person’s quality of life but are very treatable.</p>
+          <button id="card2-btn">Read more</button>
+        </div>
+        <div class="yoga-card">
+          <img src="bluegirl.jpeg" alt="Yoga">
+          <h3 id="card3-title">Why stress happens and how to manage it</h3>
+          <p id="card3-p">Stress is a natural reaction to specific demands and events, but ongoing stress can affect a person’s health and wellbeing. Tips for managing stress include exercise, setting priorities, counseling, and more.</p>
+          <button id="card3-btn">Read more</button>
+        </div>
+      </section>
+    </article>
+    <article>
+      <h2 id="campaign-title">Awareness Campaign</h2>
+      <p id="campaign-p">Join our community outreach program this November.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div id="copyright" class="copyright">© 2025 मनोHEAL</div>
+    </div>
+  </footer>
+  <script src="news_translation.js"></script>
+</body>
+</html>

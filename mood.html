@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>My Space — मनोHEAL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600&display=swap" rel="stylesheet"> -->
+    <style>
+      /* Reset & Base Styles */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      .hidden {
+        display: none;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        font-family: "Inter", Arial, sans-serif;
+        background: linear-gradient(135deg, #fff0e1 0%, #ffe5d9 100%);
+        color: #202048;
+        line-height: 1.6;
+        padding-top: 80px; /* Space for the fixed header */
+        overflow: hidden; /* Prevents scrolling for this full-page layout */
+      }
+      /* --- HEADER CSS --- */
+      .site-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        border-bottom: 1px solid #fee2e2;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        height: 80px;
+      }
+      .site-header .wrap {
+        max-width: none;
+        padding: 0 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .logo {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+      .brand-name {
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: #202048;
+      }
+      .main-nav a {
+        margin: 0 16px;
+        color: #7975a5;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+      .main-nav a.active,
+      .main-nav a:hover {
+        color: #e69299;
+      }
+      .login-btn {
+        padding: 10px 10px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        background: #e69299;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+      .login-btn:hover {
+        background-color: #e5a4a9;
+        transform: translateY(-2px);
+      }
+      .header-cta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .header-cta .login-btn {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+        border-radius: 6px;
+      }
+      /* --- Dashboard Layout --- */
+      .dashboard-layout {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 30px;
+        padding: 30px 40px;
+        height: calc(100vh - 80px);
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+      /* --- Left Column (Journal Section) --- */
+      .journal-section {
+        background: #ffffff;
+        border-radius: 24px;
+        box-shadow: 0 15px 40px rgba(121, 117, 165, 0.1);
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+      }
+      .journal-section h3 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+      }
+      .journal-section textarea {
+        width: 100%;
+        flex-grow: 1;
+        padding: 15px;
+        border-radius: 12px;
+        border: 1px solid #fee2e2;
+        font-size: 1rem;
+        resize: none;
+        outline: none;
+        transition: border-color 0.3s, box-shadow 0.3s;
+        margin-bottom: 20px;
+      }
+      .journal-section textarea:focus {
+        border-color: #e69299;
+        box-shadow: 0 0 0 4px rgba(230, 146, 153, 0.25);
+      }
+      .journal-history {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #fee2e2;
+      }
+      .journal-history h4 {
+        font-size: 1.2rem;
+        color: #574669;
+        margin-bottom: 10px;
+      }
+      /* --- Right Column --- */
+      .right-column {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+      /* --- Mood Tracker (Top Right) --- */
+      .mood-tracker-container {
+        background: #ffffff;
+        border-radius: 24px;
+        box-shadow: 0 15px 40px rgba(121, 117, 165, 0.1);
+        padding: 25px;
+      }
+      .mood-tracker-container h4 {
+        font-size: 1.5rem;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .mood-options {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 25px;
+      }
+      .mood-card {
+        flex: 0 1 30%;
+        background: #f9fafb;
+        border: 1px solid #fee2e2;
+        padding: 15px;
+        border-radius: 14px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .mood-card span {
+        font-size: 28px;
+        display: block;
+        line-height: 1;
+      }
+      .mood-card p {
+        margin: 8px 0 0 0;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #574669;
+      }
+      .mood-card:hover {
+        border-color: #e5a4a9;
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(121, 117, 165, 0.08);
+      }
+      .mood-card.active {
+        background: #e69299;
+        border-color: #e69299;
+        color: #fff;
+        transform: translateY(-4px);
+      }
+      .mood-card.active p {
+        color: #fff;
+      }
+      /* --- MODIFIED: Breathe Section --- */
+      .breathe-section {
+        flex-grow: 1;
+        background: #ffffff;
+        border-radius: 24px;
+        box-shadow: 0 15px 40px rgba(121, 117, 165, 0.1);
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; /* Aligns items vertically */
+      }
+      .breathe-section h4 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+      #instruction-text {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #7975a5;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+      .breathe-circle {
+        width: 80px;
+        height: 80px;
+        background-color: #ffe5d9;
+        border-radius: 50%;
+        border: 2px solid #e69299;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #202048;
+        transition: transform 5s linear;
+        cursor: pointer; /* Makes it obvious it's clickable */
+      }
+      .breathe-circle.breathing {
+        transform: scale(1.5);
+      }
+      /* --- General Button Style --- */
+      .log-btn {
+        background: #e69299;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 12px;
+        font-weight: bold;
+        cursor: pointer;
+        color: #fff;
+        width: auto;
+        font-size: 1rem;
+        transition: background 0.3s ease, transform 0.2s ease;
+        display: block;
+        margin: 0 auto;
+      }
+      .log-btn:hover {
+        background: #e5a4a9;
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <div class="brand">
+          <img src="circular_logo.png" alt="मनोHEAL logo" class="logo" />
+          <span class="brand-name"><a href="/index">मनोHEAL</a></span>
+        </div>
+        <nav class="main-nav">
+          <a href="/AIChatbot">Emily</a>
+          <a href="/news">Newsfeed</a>
+          <a href="/yoga">Yoga</a>
+          <a href="/group_chat_2">GroupChat</a>
+          <a href="/mood" class="active">My Space</a>
+        </nav>
+        <div class="header-cta">
+          <a id="profile-btn" class="btn login-btn" href="/profile">Profile</a>
+          <a id="logout-btn" class="btn login-btn" href="/logout">Logout</a>
+          <div class="relative inline-block ml-2">
+            <button
+              id="language-toggle"
+              class="p-2 rounded-full text-secondary-text hover:bg-rose-100/50 transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9V3m0 18a9 9 0 01-9-9m9-9a9 9 0 00-9 9"
+                />
+              </svg>
+            </button>
+            <div
+              id="language-menu"
+              class="hidden absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-xl py-1 z-30"
+            >
+              <a
+                href="#"
+                data-lang="en"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >English</a
+              >
+              <a
+                href="#"
+                data-lang="hi"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >हिंदी (Hindi)</a
+              >
+              <a
+                href="#"
+                data-lang="ks"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >Kashmiri</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-layout">
+      <div class="journal-section">
+        <h3 id="journal-title">New Journal Entry</h3>
+        <textarea
+          id="journal-textarea"
+          placeholder="What's on your mind today? Tell me everything..."
+        ></textarea>
+        <button id="journal-save-btn" class="log-btn">Save Entry</button>
+        <div class="journal-history">
+          <h4 id="journal-history-title">My Story</h4>
+          <p id="journal-history-placeholder" style="color: #7975a5">
+            Your past journal entries will appear here.
+          </p>
+        </div>
+      </div>
+
+      <div class="right-column">
+        <div class="mood-tracker-container">
+          <h4 id="mood-title">How are you feeling?</h4>
+          <div class="mood-options">
+            <div class="mood-card">
+              <span>😊</span>
+              <p id="mood-happy">Happy</p>
+            </div>
+            <div class="mood-card">
+              <span>😢</span>
+              <p id="mood-sad">Sad</p>
+            </div>
+            <div class="mood-card">
+              <span>😰</span>
+              <p id="mood-anxious">Anxious</p>
+            </div>
+            <div class="mood-card">
+              <span>😌</span>
+              <p id="mood-calm">Calm</p>
+            </div>
+            <div class="mood-card">
+              <span>⚡</span>
+              <p id="mood-energetic">Energetic</p>
+            </div>
+            <div class="mood-card">
+              <span>😴</span>
+              <p id="mood-tired">Tired</p>
+            </div>
+          </div>
+          <button id="mood-log-btn" class="log-btn">Log Entry</button>
+        </div>
+
+        <div class="breathe-section">
+          <h4 id="breathe-title">Breathe</h4>
+          <p id="instruction-text">Click the circle to begin</p>
+          <div class="breathe-circle" id="breathe-circle"></div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // --- TRANSLATION SETUP ---
+
+      const languageToggle = document.getElementById("language-toggle");
+      const languageMenu = document.getElementById("language-menu");
+
+      const translations = {
+        en: {
+          emily: "Emily",
+          newsfeed: "Newsfeed",
+          yoga: "Yoga",
+          groupchat: "GroupChat",
+          mySpace: "My Space",
+          profile: "Profile",
+          logout: "Logout",
+          journalTitle: "New Journal Entry",
+          journalPlaceholder:
+            "What's on your mind today? Tell me everything...",
+          journalSaveBtn: "Save Entry",
+          journalHistoryTitle: "My Story",
+          journalHistoryPlaceholder:
+            "Your past journal entries will appear here.",
+          moodTitle: "How are you feeling?",
+          moodHappy: "Happy",
+          moodSad: "Sad",
+          moodAnxious: "Anxious",
+          moodCalm: "Calm",
+          moodEnergetic: "Energetic",
+          moodTired: "Tired",
+          moodLogBtn: "Log Entry",
+          breatheTitle: "Breathe",
+          breatheInitial: "Click the circle to begin",
+          breatheInhale: "Inhale...",
+          breatheHold: "Hold",
+          breatheExhale: "Exhale...",
+        },
+        hi: {
+          emily: "एमिली",
+          newsfeed: "न्यूज़फ़ीड",
+          yoga: "योग",
+          groupchat: "समूह चैट",
+          mySpace: "मेरी जगह",
+          profile: "प्रोफ़ाइल",
+          logout: "लॉग आउट",
+          journalTitle: "नई जर्नल प्रविष्टि",
+          journalPlaceholder: "आज आपके मन में क्या है? मुझे सब कुछ बताएं...",
+          journalSaveBtn: "प्रविष्टि सहेजें",
+          journalHistoryTitle: "मेरी कहानी",
+          journalHistoryPlaceholder:
+            "आपकी पिछली जर्नल प्रविष्टियाँ यहाँ दिखाई देंगी।",
+          moodTitle: "आप कैसा महसूस कर रहे हैं?",
+          moodHappy: "खुश",
+          moodSad: "उदास",
+          moodAnxious: "चिंतित",
+          moodCalm: "शांत",
+          moodEnergetic: "ऊर्जावान",
+          moodTired: "थका हुआ",
+          moodLogBtn: "प्रविष्टि लॉग करें",
+          breatheTitle: "साँस लें",
+          breatheInitial: "शुरू करने के लिए गोले पर क्लिक करें",
+          breatheInhale: "साँस अंदर लें...",
+          breatheHold: "रोकें",
+          breatheExhale: "साँस बाहर छोड़ें...",
+        },
+        ks: {
+          emily: "एमिली",
+          newsfeed: "खबर",
+          yoga: "योग",
+          groupchat: "ग्रुप चैट",
+          mySpace: "म्योन जाय",
+          profile: "प्रोफ़ाइल",
+          logout: "लॉग आउट",
+          journalTitle: "نٔو جرنل اندراج",
+          journalPlaceholder:
+            "از تُہندِس ذہنَس منز کیا چھُ؟ وۆنِو میہٕ سٲری پٲٹھۍ...",
+          journalSaveBtn: "اندراج محفوظ کٔرِو",
+          journalHistoryTitle: "مؠٲنی دَلیل",
+          journalHistoryPlaceholder:
+            "تُہندِ گُزشتہٕ جرنل اندراج ییِتہِ نظرِ۔",
+          moodTitle: "توہیہ کیا چھِو محسوس کران؟",
+          moodHappy: "خوش",
+          moodSad: "اُداس",
+          moodAnxious: "فکر مند",
+          moodCalm: "پرسکون",
+          moodEnergetic: "توانا",
+          moodTired: "تھکِمُت",
+          moodLogBtn: "اندراج لاگ کٔرِو",
+          breatheTitle: "ساہ",
+          breatheInitial: "شروع کرنہٕ خٲطرٕ حلقس پیٹھ کلک کٔرِو",
+          breatheInhale: "ساہ اندر نِیو...",
+          breatheHold: "رُکو",
+          breatheExhale: "ساہ نؠبر کڑو...",
+        },
+      };
+
+      let currentLanguage = localStorage.getItem("language") || "en";
+
+      function changeLanguage(lang) {
+        if (!translations[lang]) return;
+        currentLanguage = lang;
+        localStorage.setItem("language", lang);
+
+        const t = translations[lang];
+
+        // --- Update all static text on the page ---
+        document.querySelector('.main-nav a[href="/AIChatbot"]').textContent =
+          t.emily;
+        document.querySelector('.main-nav a[href="/news"]').textContent =
+          t.newsfeed;
+        document.querySelector('.main-nav a[href="/yoga"]').textContent = t.yoga;
+        document.querySelector(
+          '.main-nav a[href="/group_chat_2"]'
+        ).textContent = t.groupchat;
+        document.querySelector('.main-nav a[href="/mood"]').textContent =
+          t.mySpace;
+
+        document.getElementById("profile-btn").textContent = t.profile;
+        document.getElementById("logout-btn").textContent = t.logout;
+
+        document.getElementById("journal-title").textContent = t.journalTitle;
+        document.getElementById("journal-textarea").placeholder =
+          t.journalPlaceholder;
+        document.getElementById("journal-save-btn").textContent =
+          t.journalSaveBtn;
+        document.getElementById("journal-history-title").textContent =
+          t.journalHistoryTitle;
+        document.getElementById("journal-history-placeholder").textContent =
+          t.journalHistoryPlaceholder;
+
+        document.getElementById("mood-title").textContent = t.moodTitle;
+        document.getElementById("mood-happy").textContent = t.moodHappy;
+        document.getElementById("mood-sad").textContent = t.moodSad;
+        document.getElementById("mood-anxious").textContent = t.moodAnxious;
+        document.getElementById("mood-calm").textContent = t.moodCalm;
+        document.getElementById("mood-energetic").textContent = t.moodEnergetic;
+        document.getElementById("mood-tired").textContent = t.moodTired;
+        document.getElementById("mood-log-btn").textContent = t.moodLogBtn;
+
+        document.getElementById("breathe-title").textContent = t.breatheTitle;
+        document.getElementById("instruction-text").textContent =
+          t.breatheInitial;
+      }
+
+      // --- LANGUAGE SWITCHER EVENT LISTENERS ---
+      languageToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        languageMenu.classList.toggle("hidden");
+      });
+
+      languageMenu.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (e.target.tagName === "A" && e.target.dataset.lang) {
+          changeLanguage(e.target.dataset.lang);
+          languageMenu.classList.add("hidden");
+        }
+      });
+
+      document.addEventListener("click", () => {
+        if (!languageMenu.classList.contains("hidden")) {
+          languageMenu.classList.add("hidden");
+        }
+      });
+
+      // --- BREATHE CIRCLE LOGIC ---
+      const circle = document.getElementById("breathe-circle");
+      const instructionText = document.getElementById("instruction-text");
+      const inhaleTime = 5000;
+      const holdTime = 3000;
+      const exhaleTime = 5000;
+      let countdownInterval;
+      let isBreathing = false;
+
+      function runCountdown(durationSeconds, onComplete) {
+        clearInterval(countdownInterval);
+        let timer = durationSeconds;
+        if (timer <= 0) return;
+        circle.textContent = timer;
+        countdownInterval = setInterval(() => {
+          timer--;
+          if (timer > 0) {
+            circle.textContent = timer;
+          } else {
+            clearInterval(countdownInterval);
+            if (onComplete) onComplete();
+          }
+        }, 1000);
+      }
+
+      circle.addEventListener("click", () => {
+        if (isBreathing) return;
+
+        isBreathing = true;
+        circle.style.cursor = "default";
+        circle.textContent = "";
+
+        const t = translations[currentLanguage];
+
+        instructionText.textContent = t.breatheInhale;
+        circle.classList.add("breathing");
+        runCountdown(inhaleTime / 1000);
+
+        setTimeout(() => {
+          instructionText.textContent = t.breatheHold;
+          runCountdown(holdTime / 1000);
+        }, inhaleTime);
+
+        setTimeout(() => {
+          instructionText.textContent = t.breatheExhale;
+          circle.classList.remove("breathing");
+          runCountdown(exhaleTime / 1000);
+        }, inhaleTime + holdTime);
+
+        setTimeout(() => {
+          instructionText.textContent = t.breatheInitial;
+          circle.textContent = "";
+          isBreathing = false;
+          circle.style.cursor = "pointer";
+        }, inhaleTime + holdTime + exhaleTime);
+      });
+
+      // --- INITIALIZE PAGE ON LOAD ---
+      document.addEventListener("DOMContentLoaded", () => {
+        changeLanguage(currentLanguage);
+      });
+    </script>
+  </body>
+</html>

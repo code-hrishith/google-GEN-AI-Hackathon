@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book an Appointment - ManoHEAL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .font-logo {
+        font-family: "Poppins", sans-serif;
+      }
+      .logo {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "primary-text": "#202048",
+              "secondary-text": "#7975a5",
+              "highlight-purple": "#574669",
+              "accent-rose": "#e69299",
+              "accent-pink": "#e5a4a9",
+              "accent-mauve": "#805c6c",
+              "ui-steel-blue": "#3c4c6c",
+              "peach-bg": "#fff0e1",
+              "peach-bg-end": "#ffe5d9",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-gradient-to-br from-peach-bg to-peach-bg-end">
+    <div class="flex flex-col h-screen">
+      <!-- Header -->
+      <header
+        class="site-header bg-white/80 backdrop-blur-md sticky top-0 z-10 border-b border-rose-100"
+      >
+        <div class="wrap mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between h-20">
+            <div class="flex items-center space-x-3">
+              <!-- <img src="https://placehold.co/50x50/e69299/FFFFFF?text=M" alt="Logo" class="logo rounded-full"> -->
+              <img src="circular_logo.png" alt="मनोHEAL logo" class="logo" />
+              <span
+                class="brand-name text-2xl font-logo font-semibold text-primary-text"
+                ><a href="index.html">मनोHEAL</a></span
+              >
+            </div>
+            <nav class="hidden md:flex items-center space-x-8">
+              <a
+                href="/AIChatbot"
+                class="text-secondary-text hover:text-accent-rose transition-colors"
+                >Emily</a
+              >
+              <a
+                href="/news"
+                class="text-secondary-text hover:text-accent-rose transition-colors"
+                >Newsfeed</a
+              >
+              <a
+                href="/yoga"
+                class="text-secondary-text hover:text-accent-rose transition-colors"
+                >Yoga</a
+              >
+              <a
+                href="/group_chat_2"
+                class="text-secondary-text hover:text-accent-rose transition-colors"
+                >GroupChat</a
+              >
+              <a
+                href="/mood"
+                class="text-secondary-text hover:text-accent-rose transition-colors"
+                >My Space</a
+              >
+            </nav>
+            <div class="header-cta">
+              <a
+                class="btn login-btn bg-accent-rose hover:bg-accent-pink text-white font-semibold py-2 px-6 rounded-lg transition-all"
+                href="/profile"
+                >Profile</a
+              >
+              <a
+                class="btn login-btn bg-accent-rose hover:bg-accent-pink text-white font-semibold py-2 px-6 rounded-lg transition-all"
+                href="/logout"
+                >Logout</a
+              >
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="flex-1 flex items-center justify-center p-4">
+        <div class="w-full max-w-4xl mx-auto">
+          <div
+            class="bg-white/70 backdrop-blur-lg p-6 sm:p-8 rounded-2xl shadow-lg border border-white/30"
+          >
+            <div class="mb-6">
+              <h2 class="text-2xl sm:text-3xl font-bold text-primary-text">
+                Book an Appointment
+              </h2>
+              <p class="text-secondary-text mt-1">
+                Take the next step in your mental wellness journey.
+              </p>
+            </div>
+
+            <div class="space-y-4">
+              <h3
+                class="text-xl font-semibold text-highlight-purple border-b border-rose-100 pb-2"
+              >
+                Appointment Details
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Service Type -->
+                <div>
+                  <label
+                    for="service"
+                    class="block text-sm font-medium text-primary-text mb-1"
+                    >Service</label
+                  >
+                  <select
+                    id="service"
+                    class="w-full p-2.5 border border-rose-200 rounded-lg bg-white/50 focus:ring-2 focus:ring-accent-rose focus:outline-none transition"
+                  >
+                    <option>Select a service type</option>
+                    <option>Individual Counseling</option>
+                    <option>Psychiatry Consultation</option>
+                    <option>Group Therapy</option>
+                  </select>
+                </div>
+                <!-- Date -->
+                <div>
+                  <label
+                    for="date"
+                    class="block text-sm font-medium text-primary-text mb-1"
+                    >Date</label
+                  >
+                  <input
+                    type="date"
+                    id="date"
+                    class="w-full p-2.5 border border-rose-200 rounded-lg bg-white/50 focus:ring-2 focus:ring-accent-rose focus:outline-none transition"
+                  />
+                </div>
+                <!-- Provider -->
+                <div>
+                  <label
+                    for="provider"
+                    class="block text-sm font-medium text-primary-text mb-1"
+                    >Provider</label
+                  >
+                  <select
+                    id="provider"
+                    class="w-full p-2.5 border border-rose-200 rounded-lg bg-white/50 focus:ring-2 focus:ring-accent-rose focus:outline-none transition"
+                  >
+                    <option>Select a provider</option>
+                    <option>Dr. Sharma</option>
+                    <option>Mr. Rohan Verma</option>
+                    <option>Ms. Priya Singh</option>
+                  </select>
+                </div>
+                <!-- Time -->
+                <div>
+                  <label
+                    for="time"
+                    class="block text-sm font-medium text-primary-text mb-1"
+                    >Time</label
+                  >
+                  <select
+                    id="time"
+                    class="w-full p-2.5 border border-rose-200 rounded-lg bg-white/50 focus:ring-2 focus:ring-accent-rose focus:outline-none transition"
+                  >
+                    <option>Select a time slot</option>
+                    <option>09:00 AM</option>
+                    <option>11:00 AM</option>
+                    <option>02:00 PM</option>
+                    <option>04:00 PM</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Reason for Visit -->
+              <div>
+                <label
+                  for="reason"
+                  class="block text-sm font-medium text-primary-text mb-1"
+                  >Reason for Visit (Optional)</label
+                >
+                <textarea
+                  id="reason"
+                  rows="3"
+                  class="w-full p-2.5 border border-rose-200 rounded-lg bg-white/50 focus:ring-2 focus:ring-accent-rose focus:outline-none transition"
+                  placeholder="What would you like to discuss?"
+                ></textarea>
+              </div>
+
+              <!-- Confirm Button -->
+              <div class="pt-4 flex justify-end">
+                <button
+                  class="bg-accent-rose hover:bg-accent-pink text-white font-bold py-2.5 px-8 rounded-lg transition-all shadow-lg shadow-rose-500/30 hover:shadow-xl hover:shadow-rose-500/40 transform hover:-translate-y-0.5"
+                >
+                  Confirm Appointment
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

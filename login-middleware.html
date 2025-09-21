@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - ManoHEAL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .logo {
+        width: 60px; /* Increased size */
+        height: 60px; /* Increased size */
+        object-fit: cover;
+        border-radius: 50%;
+      }
+      /* Reset & Base Styles */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      body {
+        font-family: "Inter", Arial, sans-serif;
+        background:url(/logo_login.png);
+        /* background: linear-gradient(
+          135deg,
+          #fff0e1 0%,
+          #ffe5d9 100% */
+        /* ); Peach background */
+        color: #202048; /* Primary Text: deep indigo */
+        line-height: 1.6;
+      }
+
+      /* Unified Wrapper for Content Centering */
+      .wrap {
+        width: 100%;
+        max-width: 1200px; /* Consistent max-width */
+        margin: 0 auto;
+        padding: 0 40px; /* Consistent side padding */
+      }
+
+      main.content-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 0;
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "primary-text": "#202048",
+              "secondary-text": "#7975a5",
+              "highlight-purple": "#574669",
+              "accent-rose": "#e69299",
+              "accent-pink": "#e5a4a9",
+              "accent-mauve": "#805c6c",
+              "ui-steel-blue": "#3c4c6c",
+              "peach-bg": "#fff0e1",
+              "peach-bg-end": "#ffe5d9",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body>
+    <!-- Main Content -->
+    <main class="content-container wrap">
+      <div class="w-full max-w-6xl text-center">
+        <div class="brand flex items-center justify-center space-x-4 mb-10">
+          <!-- <img src="https://placehold.co/60x60/e69299/FFFFFF?text=M" alt="मनोHEAL logo" class="logo" /> -->
+          <img src="circular_logo.png" alt="मनोHEAL logo" class="logo">
+          <span
+            class="brand-name text-4xl font-bold"
+            style="font-family: 'Poppins', sans-serif"
+            >मनोHEAL</span
+          >
+        </div>
+        <h1 class="text-5xl md:text-6xl font-bold text-primary-text mb-4">
+          Welcome!
+        </h1>
+        <p class="text-xl text-secondary-text mb-16">
+          Please select your role to continue
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <!-- Admin Login Card -->
+           
+          <a
+            href="/admin"
+            class="group block bg-white/70 backdrop-blur-lg p-12 rounded-2xl shadow-lg border border-white/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+          >
+            <div
+              class="w-20 h-20 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-6 transition-colors duration-300 group-hover:bg-accent-rose"
+            >
+              <svg
+                class="w-10 h-10 text-accent-rose transition-colors duration-300 group-hover:text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                />
+              </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-highlight-purple mb-2">Admin</h2>
+            <p class="text-secondary-text text-base">
+              Access administrative dashboard
+            </p>
+          </a>
+
+          <!-- Counselors Login Card -->
+
+          <a
+            href="/psy"
+            class="group block bg-white/70 backdrop-blur-lg p-12 rounded-2xl shadow-lg border border-white/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+          >
+            <div
+              class="w-20 h-20 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-6 transition-colors duration-300 group-hover:bg-accent-rose"
+            >
+              <svg
+                class="w-10 h-10 text-accent-rose transition-colors duration-300 group-hover:text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                />
+              </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-highlight-purple mb-2">
+              Counselors
+            </h2>
+            <p class="text-secondary-text text-base">
+              Manage patient data and sessions
+            </p>
+          </a>
+
+          <!-- User Login Card -->
+
+          <a
+            href="/sign-up"
+            class="group block bg-white/70 backdrop-blur-lg p-12 rounded-2xl shadow-lg border border-white/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+          >
+            <div
+              class="w-20 h-20 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-6 transition-colors duration-300 group-hover:bg-accent-rose"
+            >
+              <svg
+                class="w-10 h-10 text-accent-rose transition-colors duration-300 group-hover:text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9 9.75h.008v.008H9V9.75zm6 0h.008v.008H15V9.75z"
+                />
+              </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-highlight-purple mb-2">User</h2>
+            <p class="text-secondary-text text-base">
+              Continue your wellness journey
+            </p>
+          </a>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
+

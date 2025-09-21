@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>मनोHeal - Sign-Up</title>
+    <!-- <link rel="stylesheet" href="sign-up-style.css"> -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: #fbeff2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .container {
+        display: flex;
+        width: 90%;
+        max-width: 1500px;
+        background: white;
+        border-radius: 25px;
+        overflow: hidden;
+        box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+      }
+      .left {
+        flex: 1;
+        background: linear-gradient(135deg, #f2929c, #f6b1b7);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 40px;
+        border-radius: 25px 0 0 25px;
+      }
+
+      .left h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+      .navbar a {
+        text-decoration: none;
+        color: white;
+        font-weight: 500;
+      }
+
+      .left .welcome {
+        font-size: 4rem;
+        font-weight: bold;
+        margin-top: auto;
+      }
+
+      .right {
+        flex: 1;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: #fff;
+        border-radius: 10px;
+      }
+
+      .right h2 {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+      }
+
+      label {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 6px;
+        text-align: left;
+        color: #555;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 25px;
+        border: 1px solid #ccc;
+        outline: none;
+        font-size: 0.9rem;
+      }
+
+      .passwords {
+        display: flex;
+        gap: 10px;
+      }
+
+      .passwords input {
+        flex: 1;
+      }
+
+      button {
+        padding: 12px;
+        border: none;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+        width: 200px;
+      }
+
+      .create-btn {
+        background: #f2929c;
+        color: white;
+      }
+
+      .create-btn:hover {
+        background: #e67b86;
+      }
+
+      .login-btn {
+        background: #f6d9dc;
+        color: #333;
+        margin-top: 10px;
+      }
+
+      .login-btn:hover {
+        background: #f3c2c7;
+      }
+
+      .or {
+        text-align: center;
+        margin: 10px 0;
+        color: #777;
+        font-size: 0.9rem;
+      }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: url(/logo_login.png);
+        background-size: cover;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 500px;
+        height: 600px;
+      }
+
+      .login-box {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
+        padding: 10px;
+        padding-left: 30px;
+        padding-right: 30px;
+        border-radius: 15px;
+        width: 450px;
+        height: 850px;
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25);
+        text-align: center;
+      }
+      .logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .logo img {
+        width: 200px;
+        height: 200px;
+        margin-bottom: 10px;
+      }
+
+      .logo h2 {
+        margin: 0;
+        font-size: 22px;
+        color: #333;
+      }
+      .login-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #444;
+      }
+
+      label {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 6px;
+        text-align: left;
+        color: #555;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        box-sizing: border-box;
+        outline: none;
+      }
+
+      input:focus {
+        border-color: #f39c9c;
+        box-shadow: 0 0 5px rgba(243, 156, 156, 0.5);
+      }
+
+      .forgot-password {
+        text-align: right;
+        margin-bottom: 20px;
+      }
+
+      .btn {
+        width: 100%;
+        background: #f9a8a8;
+        color: #fff;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s ease;
+      }
+
+      .btn:hover {
+        background: #f08484;
+      }
+      .mt-12 {
+        margin-top: 3rem; /* 48px */
+      }
+      .terms-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        text-align: left;
+      }
+
+      .terms-container input[type="checkbox"] {
+        width: auto; /* Overrides the default 100% width */
+        margin: 0;
+        flex-shrink: 0; /* Prevents checkbox from shrinking */
+      }
+
+      .terms-container label {
+        margin-bottom: 0; /* Removes default label margin */
+        font-size: 13px;
+        color: #555;
+        line-height: 1.4;
+      }
+
+      .terms-container a {
+        color: #e67b86; /* Accent color */
+        text-decoration: underline;
+        font-weight: 500;
+      }
+
+      .pass {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+      }
+
+      select {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        box-sizing: border-box;
+        outline: none;
+        background: white;
+      }
+
+      select:focus {
+        border-color: #f39c9c;
+        box-shadow: 0 0 5px rgba(243, 156, 156, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-box">
+        <div class="logo">
+          <img src="/logo_signup.png" alt="Logo" />
+        </div>
+        <h3 class="login-title">Sign-up</h3>
+
+        <form id="signup-form" action="/users/signup" method="post">
+          <label for="username">username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="username"
+            required
+          />
+
+          <!-- <label for="username">College</label>
+        <input type="text" id="college" placeholder="college" required> -->
+
+          <label for="college">College</label>
+          <select id="college" name="college" required>
+            <option value="">-- Select College --</option>
+
+            <option value="Gautam Buddha University">
+              Gautam Buddha University
+            </option>
+          </select>
+
+          <label for="roll_no">Roll No.</label>
+          <input
+            type="text"
+            id="Rollno"
+            name="Rollno"
+            placeholder="Enter your Roll No."
+            required
+          />
+
+          <div class="pass">
+            <div class="pass-cont">
+              <label for="password">Age</label>
+              <input
+                type="number"
+                id="age"
+                name="age"
+                placeholder="Age"
+                min="16"
+                max="25"
+                required
+              />
+            </div>
+            <!-- <div class="pass-cont">
+              <label for="password">Gender</label>
+              <input
+                type="text"
+                id="gender"
+                name="gender"
+                placeholder="Gender"
+                required
+              />
+            </div> -->
+
+            <div class="pass-cont">
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender" required>
+                <option value="">-- Select Gender --</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+            </div>
+          </div>
+          <div class="pass">
+            <div class="pass-cont">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <div class="pass-cont">
+              <label for="password">Confirm Password</label>
+
+              <input
+                type="password"
+                id="confirm-password"
+                name="confirm-password"
+                placeholder="Confirm Password"
+                required
+              />
+            </div>
+          </div>
+          <div class="terms-container">
+            <input type="checkbox" id="terms" name="terms" required />
+            <label for="terms">
+              I agree to the
+              <a href="/t&c" target="_blank"
+                >Terms & Conditions</a
+              >
+            </label>
+          </div>
+          <button type="submit" class="btn" href="/log-in">Sign-Up</button>
+          <!-- <div class="mt-8 text-center">
+                <p class="text-sm text-secondary-text">
+                    Already have an account? 
+                    <a href="/login" class="font-semibold text-accent-rose hover:underline">Log in</a>
+                </p>
+            </div> -->
+          <div class="or">
+            <pre>
+Or Have a account - <a href="/log-in"><button type="button" class="login-btn">Log in</button></a>
+            </pre>
+          </div>
+          <!-- <a href="/log-in"><button type="button" class="login-btn">Log in</button></a> -->
+        </form>
+      </div>
+    </div>
+
+    <script src="../signup.js"></script>
+  </body>
+</html>

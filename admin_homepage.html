@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - ManoHEAL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+    --bg-start: #fff0e1;
+    --bg-end: #ffe5d9;
+    --primary-text: #202048;
+    --secondary-text: #7975a5;
+    --highlight-purple: #574669;
+    --accent-rose: #e69299;
+    --accent-pink: #e5a4a9;
+}
+body {
+  font-family: "Inter", Arial, sans-serif;
+  background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+  color: var(--primary-text);
+  line-height: 1.6;
+}
+.brand-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.75rem; /* Larger brand name */
+}
+.logo {
+  width: 50px; /* Slightly larger logo */
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.glass-pane {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+#user-table::-webkit-scrollbar { width: 6px; }
+#user-table::-webkit-scrollbar-track { background: transparent; }
+#user-table::-webkit-scrollbar-thumb { background: #e5a4a9; border-radius: 3px; }
+#user-table::-webkit-scrollbar-thumb:hover { background: #e69299; }
+
+      
+      /* :root {
+          --bg-start: #fff0e1;
+          --bg-end: #ffe5d9;
+          --primary-text: #202048;
+          --secondary-text: #7975a5;
+          --highlight-purple: #574669;
+          --accent-rose: #e69299;
+          --accent-pink: #e5a4a9;
+      }
+      body {
+        font-family: "Inter", Arial, sans-serif;
+        background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+        color: var(--primary-text);
+        line-height: 1.6;
+        padding-top:190px;
+      }
+      .brand-name {
+        font-family: 'Poppins', sans-serif;
+      }
+      .logo {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+      .glass-pane {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      #user-table::-webkit-scrollbar { width: 6px; }
+      #user-table::-webkit-scrollbar-track { background: transparent; }
+      #user-table::-webkit-scrollbar-thumb { background: #e5a4a9; border-radius: 3px; }
+      #user-table::-webkit-scrollbar-thumb:hover { background: #e69299; } */
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "primary-text": "#202048",
+              "secondary-text": "#7975a5",
+              "highlight-purple": "#574669",
+              "accent-rose": "#e69299",
+              "accent-pink": "#e5a4a9",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="min-h-screen flex flex-col items-center p-4 sm:p-6 md:p-8">
+    <header class="w-full max-w-7xl flex justify-between items-center mb-8">
+        <div class="brand flex items-center space-x-3">
+
+          <img src="circular_logo.png" alt="मनोHEAL logo" class="logo">
+          <span class="brand-name">मनोHEAL</span>
+
+        </div>
+        <a href="/logout" class="py-2 px-5 rounded-lg bg-accent-rose text-white font-semibold hover:bg-accent-pink transition-colors shadow-md">Logout</a>
+    </header>
+
+    <main class="w-full max-w-7xl glass-pane rounded-2xl shadow-lg p-6 md:p-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+            <div>
+                <h1 class="text-3xl font-bold text-primary-text">User Management</h1>
+                <!-- <p class="text-secondary-text mt-1">Search, view, and manage user details.</p> -->
+            </div>
+            <div class="mt-4 md:mt-0">
+                <input id="search-bar" type="text" placeholder="Search by username..." class="w-full md:w-64 p-3 rounded-lg bg-white/80 border border-rose-100 focus:ring-2 focus:ring-accent-rose focus:outline-none placeholder-secondary-text text-primary-text">
+            </div>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-left" id="user-table">
+                <thead>
+                    <tr class="border-b border-rose-200">
+                        <th class="p-4 font-semibold text-highlight-purple">RollNo</th>
+                        <th class="p-4 font-semibold text-highlight-purple">User Info</th>
+                        <th class="p-4 font-semibold text-highlight-purple">Risk Level</th>
+                        <th class="p-4 font-semibold text-highlight-purple">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="user-row border-b border-rose-100/50 hover:bg-rose-50/50 transition-colors">
+                        <td class="p-4 font-medium text-primary-text">235UCSXXX</td>
+                        <td class="p-4 text-secondary-text italic">"Expressed self-harm thoughts"</td>
+                        <td class="p-4">
+                            <span class="font-semibold text-red-500 flex items-center">
+                                <!-- <svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 01-.8-1.6L7.75 8 5.2 4.6A1 1 0 016 3h1.382a1 1 0 01.8.4L10 5.282 11.818 3.4A1 1 0 0112.618 3H14a3 3 0 013 3v6a3 3 0 01-3 3H6a3 3 0 01-3-3V6z" clip-rule="evenodd"></path></svg> -->
+                                🔴
+                            </span>
+                        </td>
+                        <td class="p-4">
+                            <a href="#" class="font-medium text-accent-rose hover:underline">View Profile</a>
+                        </td>
+                    </tr>
+                    <tr class="user-row border-b border-rose-100/50 hover:bg-rose-50/50 transition-colors">
+                        <td class="p-4 font-medium text-primary-text">235UCSXXX</td>
+                        <td class="p-4 text-secondary-text italic">"Expressed self-harm thoughts"</td>
+                        <td class="p-4">
+                            <span class="font-semibold text-red-500 flex items-center">
+                                <!-- <svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 01-.8-1.6L7.75 8 5.2 4.6A1 1 0 016 3h1.382a1 1 0 01.8.4L10 5.282 11.818 3.4A1 1 0 0112.618 3H14a3 3 0 013 3v6a3 3 0 01-3 3H6a3 3 0 01-3-3V6z" clip-rule="evenodd"></path></svg> -->
+                                🔴
+                            </span>
+                        </td>
+                        <td class="p-4">
+                            <a href="#" class="font-medium text-accent-rose hover:underline">View Profile</a>
+                        </td>
+                    </tr>
+                    <tr class="user-row border-b border-rose-100/50 hover:bg-rose-50/50 transition-colors">
+                        <td class="p-4 font-medium text-primary-text">235UCSXXX</td>
+                        <td class="p-4 text-secondary-text italic">"Expressed self-harm thoughts"</td>
+                        <td class="p-4">
+                            <span class="font-semibold text-red-500 flex items-center">
+                                <!-- <svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 01-.8-1.6L7.75 8 5.2 4.6A1 1 0 016 3h1.382a1 1 0 01.8.4L10 5.282 11.818 3.4A1 1 0 0112.618 3H14a3 3 0 013 3v6a3 3 0 01-3 3H6a3 3 0 01-3-3V6z" clip-rule="evenodd"></path></svg> -->
+                                🔴
+                            </span>
+                        </td>
+                        <td class="p-4">
+                            <a href="#" class="font-medium text-accent-rose hover:underline">View Profile</a>
+                        </td>
+                    </tr>
+                    <tr class="user-row border-b border-rose-100/50 hover:bg-rose-50/50 transition-colors">
+                        <td class="p-4 font-medium text-primary-text">235UCSXXX</td>
+                        <td class="p-4 text-secondary-text italic">"Expressed self-harm thoughts"</td>
+                        <td class="p-4">
+                            <span class="font-semibold text-red-500 flex items-center">
+                                <!-- <svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 01-.8-1.6L7.75 8 5.2 4.6A1 1 0 016 3h1.382a1 1 0 01.8.4L10 5.282 11.818 3.4A1 1 0 0112.618 3H14a3 3 0 013 3v6a3 3 0 01-3 3H6a3 3 0 01-3-3V6z" clip-rule="evenodd"></path></svg> -->
+                                🟠
+                            </span>
+                        </td>
+                        <td class="p-4">
+                            <a href="#" class="font-medium text-accent-rose hover:underline">View Profile</a>
+                        </td>
+                    </tr>
+                    <tr class="user-row border-b border-rose-100/50 hover:bg-rose-50/50 transition-colors">
+                        <td class="p-4 font-medium text-primary-text">245UCSXYZ</td>
+                        <td class="p-4 text-secondary-text italic">"extreme academic pressure, unable to cope"</td>
+                        <td class="p-4">
+                            <span class="font-semibold text-green-600 flex items-center">
+                                <!-- <svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 01-.8-1.6L7.75 8 5.2 4.6A1 1 0 016 3h1.382a1 1 0 01.8.4L10 5.282 11.818 3.4A1 1 0 0112.618 3H14a3 3 0 013 3v6a3 3 0 01-3 3H6a3 3 0 01-3-3V6z" clip-rule="evenodd"></path></svg> -->
+                                🟠
+                            </span>
+                        </td>
+                        <td class="p-4">
+                            <a href="#" class="font-medium text-accent-rose hover:underline">View Profile</a>
+                        </td>
+                    </tr>
+                    <tr class="user-row border-b border-rose-100/50 hover:bg-rose-50/50 transition-colors">
+                        <td class="p-4 font-medium text-primary-text">215UCDPQR</td>
+                        <td class="p-4 text-secondary-text italic">"isolated, withdrawing from all social/academic activities"</td>
+                        <td class="p-4">
+                             <span class="font-semibold text-amber-500 flex items-center">
+                                <!-- <svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 01-.8-1.6L7.75 8 5.2 4.6A1 1 0 016 3h1.382a1 1 0 01.8.4L10 5.282 11.818 3.4A1 1 0 0112.618 3H14a3 3 0 013 3v6a3 3 0 01-3 3H6a3 3 0 01-3-3V6z" clip-rule="evenodd"></path></svg> -->
+                                🟠
+                            </span>
+                        </td>
+                        <td class="p-4">
+                            <a href="#" class="font-medium text-accent-rose hover:underline">View Profile</a>
+                        </td>
+                    </tr>
+                     <!-- More users can be added here -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchBar = document.getElementById('search-bar');
+            const userRows = document.querySelectorAll('.user-row');
+
+            searchBar.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                userRows.forEach(row => {
+                    const username = row.querySelector('td:first-child').textContent.toLowerCase();
+                    if (username.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+  </body>
+</html>

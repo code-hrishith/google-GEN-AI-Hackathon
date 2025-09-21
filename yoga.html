@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Yoga & Meditation — मनोHEAL</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <style>
+    /* Reset & Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    .hidden {
+      display: none;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: linear-gradient(135deg, #fff0e1 0%, #ffe5d9 100%);
+      color: #202048;
+      line-height: 1.6;
+      padding-top: 80px;
+    }
+    /* Unified Wrapper for Content Centering */
+    .wrap {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    /* Header (Shared) */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      border-bottom: 1px solid #FEE2E2;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      height: 80px;
+    }
+    .site-header .wrap {
+      max-width: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .brand-name {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #202048;
+    }
+    .main-nav a {
+      margin: 0 16px;
+      color: #7975a5;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .main-nav a.active,
+    .main-nav a:hover {
+      color: #e69299;
+    }
+    .header-cta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .login-btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      background: #e69299;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
+    }
+    .login-btn:hover {
+      background-color: #e5a4a9;
+    }
+    /* Yoga & Meditation Main Content */
+    .yoga-main-content {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+    .yoga-main-content header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #202048;
+      margin-bottom: 8px;
+    }
+    .yoga-main-content header p {
+      font-size: 1.1rem;
+      color: #7975a5;
+      margin-bottom: 40px;
+    }
+    /* Cards Section */
+    .yoga-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    .yoga-card {
+      background: #fff;
+      padding: 16px;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+      border: 1px solid #FEE2E2;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .yoga-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    }
+    .yoga-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+    .yoga-card .time {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      background: rgba(32, 32, 72, 0.7);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      backdrop-filter: blur(5px);
+    }
+    .yoga-card h3 {
+      margin: 10px 0 5px;
+      font-size: 1.25rem;
+      color: #574669;
+      font-weight: 600;
+    }
+    .yoga-card p.level {
+      font-size: 0.9rem;
+      color: #7975a5;
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+    .yoga-card p {
+      font-size: 1rem;
+      margin-bottom: 16px;
+      color: #7975a5;
+      flex-grow: 1;
+    }
+    .yoga-card button {
+      background: #e69299;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #fff;
+      width: 100%;
+      margin-top: auto;
+      transition: background-color 0.3s ease;
+    }
+    .yoga-card button:hover {
+      background: #e5a4a9;
+    }
+    /* Footer */
+    .site-footer {
+      background: rgba(255, 255, 255, 0.7);
+      border-top: 1px solid #FEE2E2;
+      padding: 24px 0;
+      margin-top: 40px;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .copyright {
+      color: #7975a5;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand">
+        <img src="circular_logo.png" alt="Logo" class="logo" />
+        <span class="brand-name"><a href="/index">मनोHEAL</a></span>
+      </div>
+      <nav class="main-nav">
+        <a href="/AIChatbot">Emily</a>
+        <a href="/news">Newsfeed</a>
+        <a href="/yoga">Yoga</a>
+        <a href="/group_chat_2">GroupChat</a>
+        <a href="/mood">My Space</a>
+      </nav>
+      <div class="header-cta">
+        <a id="profile-btn" class="login-btn" href="/profile">Profile</a>
+        <a id="logout-btn" class="login-btn" href="/logout">Logout</a>
+        <div class="relative inline-block ml-2">
+            <button id="language-toggle" class="p-2 rounded-full text-secondary-text hover:bg-rose-100/50 transition-colors" style="position: relative; top: 4px;">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="height: 1.5rem; width: 1.5rem; color: #7975a5;">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9V3m0 18a9 9 0 01-9-9m9-9a9 9 0 00-9 9" />
+                </svg>
+            </button>
+            <div id="language-menu" class="hidden" style="position: absolute; right: 0; margin-top: 0.5rem; width: 10rem; background-color: white; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); padding-top: 0.25rem; padding-bottom: 0.25rem; z-index: 30;">
+                <a href="#" data-lang="en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">English</a>
+                <a href="#" data-lang="hi" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">हिंदी (Hindi)</a>
+                <a href="#" data-lang="ks" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">कॉशुर (Kashmiri)</a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="yoga-main-content">
+    <header>
+      <h1 id="page-title">Yoga & Meditation</h1>
+      <p id="page-subtitle">Find balance and peace with our curated collection of yoga and meditation sessions.</p>
+    </header>
+
+    <section class="yoga-cards">
+      <div class="yoga-card">
+        <img src="blackpjyoga.jpeg" alt="Yoga">
+        <span class="time">15 min</span>
+        <h3 id="card1-title">Morning Flow for Energy</h3>
+        <p id="card1-level" class="level">Beginner</p>
+        <p id="card1-desc">A gentle 15-minute yoga session to awaken your body and mind, setting a positive tone for the day.</p>
+        <button id="card1-btn">Start Session</button>
+      </div>
+
+      <div class="yoga-card">
+        <img src="redshirtyoga.jpeg" alt="Meditation">
+        <span class="time">10 min</span>
+        <h3 id="card2-title">Meditation for Anxiety Relief</h3>
+        <p id="card2-level" class="level">All Levels</p>
+        <p id="card2-desc">This 10-minute guided meditation helps to calm a busy mind and release anxious thoughts.</p>
+        <button id="card2-btn">Start Session</button>
+      </div>
+
+      <div class="yoga-card">
+        <img src="blueladyyoga.jpeg" alt="Yoga">
+        <span class="time">20 min</span>
+        <h3 id="card3-title">Restorative Bedtime Yoga</h3>
+        <p id="card3-level" class="level">Beginner</p>
+        <p id="card3-desc">Unwind and prepare for a restful sleep with this 20-minute restorative yoga practice using pillows for support.</p>
+        <button id="card3-btn">Start Session</button>
+      </div>
+    </section>
+  </main>
+  
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div id="copyright" class="copyright">© 2025 मनोHEAL</div>
+    </div>
+  </footer>
+
+  <script src="script_yoga.js"></script>
+</body>
+</html>
