@@ -168,46 +168,23 @@ select:focus {
             required
           />
           <label for="college">Organization</label>
-          <select id="college" name="college" required>
-            <option value="">-- Select Organization --</option>
-            <option value="Gautam Buddha University">Gautam Buddha University</option>
-            <option value="Independent">Independent</option>
-          </select>
+        <input
+            type="text"
+            id="org"
+            name="org"
+            placeholder="Organization"
+            required
+          />
+          
           <div id="error-message"></div>
 
           <!-- <a href="/psy_homepage"><button type="submit" class="btn">Log In</button></a> -->
 
-           <button type="button" class="btn" id="login-btn">Log In</button>
+           <button type="button" class="btn" id="login-btn" href="/psycholgist_homepage_independent.html">Log In</button>
         <!-- </form> -->
       </div>
     </div>
 
-    <script>
-      // Get the button, dropdown, and error message elements by their IDs
-      const loginBtn = document.getElementById('login-btn');
-      const organizationSelect = document.getElementById('college');
-      const errorMessage = document.getElementById('error-message');
-
-      // Add a 'click' event listener directly to the button
-      loginBtn.addEventListener('click', function() {
-        // Get the selected organization from the dropdown
-        const selectedOrg = organizationSelect.value;
-
-        // Clear any previous error messages
-        errorMessage.textContent = '';
-
-        // Check which organization was selected and redirect
-        if (selectedOrg === 'Gautam Buddha University') {
-          // Redirect to the GBU homepage
-          window.location.href = '/psy_homepage.html';
-        } else if (selectedOrg === 'Independent') {
-          // Redirect to the independent counselor homepage
-          window.location.href = '/psy_homepage_independent.html';
-        } else {
-          // If no organization is selected, show an error message
-          errorMessage.textContent = 'Please select an organization.';
-        }
-      });
-    </script>
+<!--     -->
   </body>
 </html>
